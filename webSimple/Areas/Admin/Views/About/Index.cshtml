@@ -1,0 +1,53 @@
+﻿@model IEnumerable<webSimple.Models.About>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="padding: 4rem;">
+    <h2 class="shadow-lg p-3 mb-5 bg-white rounded text-center">About</h2>
+
+
+    @if (Model.Count() == 0)
+    {
+        <div class="text-center p-5">
+            <a href="@Url.Action("Create", "About")" class="shadow-lg p-3 mb-5 bg-white rounded text-center text-decoration-none p-5 h1">+</a>
+        </div>
+        
+    }
+    else
+    {
+        <div>
+            <h4>Bản giới thiệu</h4>
+            <hr />
+            <div class="text-center p-5">
+                <a href="@Url.Action("Create", "About")" class="shadow-lg p-3 mb-5 bg-white rounded text-center text-decoration-none p-2 h1">+</a>
+            </div>
+            <div class="dl-horizontal">
+              
+                <div style="display:grid; grid-template-columns: auto auto">
+                    @foreach (var item in Model)
+                    {
+                        <div class="row_@item.Id">
+                            @item.Title
+                        </div>
+                        <div class="row_@item.Id">
+                            <a href="@Url.Action("Details","About", new { id = item.Id})" class="btn btn-info">Chi tiết</a>
+                            <a href="@Url.Action("Edit","About", new { id = item.Id})" class="btn btn-success">Sửa</a>
+                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.Id }, new AjaxOptions
+                               {
+                                   Confirm = "Xác nhận xóa bản giới thiệu này ?",
+                                   OnComplete = $"$('.row_{item.Id}').remove();" +
+                                                 $"alert('Xoá thành công : {item.Title}');",
+                                   HttpMethod = "Post",
+                               }, new { @class = "btn btn-danger" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

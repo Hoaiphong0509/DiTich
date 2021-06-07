@@ -1,0 +1,160 @@
+﻿.overlay {
+    position: relative;
+}
+    .overlay::after {
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(218, 173, 185, 0.1);
+    }
+/*#region Create Relic*/
+::-webkit-input-placeholder { /* Edge */
+    color: white;
+}
+
+:-ms-input-placeholder { /* Internet Explorer */
+    color: white;
+}
+
+::placeholder {
+    color: white;
+}
+
+.container_relic {
+    width: 100%;
+    height: auto;
+
+    /*background-color: wheat;*/
+}
+    .container_relic .header_relic {
+        width: 100%;
+        height: 500px;
+        background-size: cover;
+        position: relative;
+    }
+        .container_relic .header_relic .cover_img_relic {
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            z-index: 0;
+            position:absolute;
+        }
+        .container_relic .header_relic .content_header_relic {
+            width: 100%;
+            position: absolute;
+            z-index: 999;
+        }
+
+            .container_relic .header_relic .content_header_relic .name_relic{
+                padding: 4rem 14rem 0 14rem;
+            }
+            .container_relic .header_relic .content_header_relic .name_relic input{
+                border: 4px dotted white;
+                width: 100%;
+                height: 50px;
+                background: transparent;
+                padding: 0 3rem;
+                color: white;
+                font-size: 28px;
+                font-weight: bold;
+                font-family: monospace;
+
+            }
+
+                .container_relic .header_relic .content_header_relic .name_relic input:focus {
+                    border: 2px dashed white;
+                    outline: 2px dashed white;
+                }
+
+
+            .container_relic .header_relic .content_header_relic .title_relic {
+                padding: 4rem 14rem 0 14rem;
+            }
+
+            .container_relic .header_relic .content_header_relic .title_relic input {
+                border: 4px dotted wheat;
+                width: 100%;
+                height: 50px;
+                background: transparent;
+                padding: 0 3rem;
+                color: white;
+                font-size: 28px;
+                font-weight: bold;
+                font-family: monospace;
+                }
+
+                .container_relic .header_relic .content_header_relic .title_relic input:focus {
+                    border: 2px dashed wheat;
+                    outline: 2px dashed wheat;
+                }
+
+            .container_relic .header_relic .content_header_relic .cover_image_relic {
+                /*display: inline;*/
+                padding: 0 16rem;
+            }
+
+                .container_relic .header_relic .content_header_relic .cover_image_relic input {
+                    border: 4px dotted wheat;
+                    width: 100%;
+                    height: auto;
+                    background: transparent;
+                    color: white;
+                    text-align: center;
+                    justify-content: center;
+                    font-size: 16px;
+                    font-weight: bold;
+                    font-family: monospace;
+                    display: inline;
+                }
+
+                    .container_relic .header_relic .content_header_relic .cover_image_relic input:focus {
+                        border: 2px dashed wheat;
+                        outline: 2px dashed wheat;
+                    }
+
+
+    .container_relic .content_relic {
+        width: 80%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .container_relic .keyword_relic {
+        width: 80%;
+        height: auto;
+        margin: 0 auto;
+        padding: 2rem;
+        font-size: 18px;
+    }
+    /*#endregion Create Relic*/
+
+
+/*#region Img cover*/
+    .header-list-img {
+    }
+.container_img .list_img {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    height: auto;
+    overflow-y: hidden;
+}
+
+    .container_img .list_img .img_item {
+        width: 250px;
+        height: 250px;
+        margin: .5rem;
+    }
+
+        .container_img .list_img .img_item img {
+            width: 100%;
+            height: 85%;
+            background-size: cover;
+            object-fit: cover;
+        }
+        .container_img .list_img .img_item .btn-delete-img {
+            text-align: center;
+
+        }
+/*#endregion Img cover*/

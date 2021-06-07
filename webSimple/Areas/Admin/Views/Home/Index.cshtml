@@ -1,0 +1,134 @@
+﻿@using Newtonsoft.Json;
+@model PagedList.IPagedList<webSimple.Models.Relic>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+<link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="Stylesheet" type="text/css" />
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Trang chủ</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Trang chủ</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Di tích</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="@Url.Action("Index", "Relic")">Chi tiết</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-info text-white mb-4">
+                    <div class="card-body">Quản lý từ khóa</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="@Url.Action("Keyword", "Relic")">Chi tiết</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Thông số</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="@Url.Action("Index", "ViewChart")">Chi tiết</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Giới thiệu</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="@Url.Action("Index", "About")">Chi tiết</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Di tích
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Di tích</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Di tích</th>
+                                <th>#</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var relic in Model)
+                            {
+                                <tr class="row_@relic.ID">
+                                    <td>@relic.RelicName</td>
+                                    <td>
+                                        <a href="@Url.Action("Details", "Relic", new { @id = relic.ID})" class="btn btn-success">Chi tiết</a>
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = relic.ID }, new AjaxOptions
+                                         {
+                                             Confirm = "Xác nhận xóa di tích này ?",
+                                             OnComplete = $"$('.row_{relic.ID}').remove();" +
+                                             $"alert('Xoá thành công : {relic.RelicName}');",
+                                             HttpMethod = "Post",
+                                         }, new { @class = "btn btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Quản lý từ khóa</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Quản lý từ khóa</th>
+                                <th>#</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var relic in Model)
+                            {
+                                <tr class="row_@relic.ID">
+                                    <td>@relic.RelicName</td>
+                                    <td>
+                                        <a href="@Url.Action("EditKeyword", "Relic", new { @id = relic.ID})" class="btn btn-primary">Chỉnh sửa từ khóa</a>
+                                        <a href="@Url.Action("DetailsKeyword", "Relic", new { @id = relic.ID})" class="btn btn-success">Xem</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+            </div>
+
+        </div>
+    </div>
+</main>

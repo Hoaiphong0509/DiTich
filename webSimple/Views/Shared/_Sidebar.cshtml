@@ -1,0 +1,47 @@
+﻿@using webSimple.Models;
+
+<!-- Sidebar -->
+<section id="sidebar">
+
+    <!-- Intro -->
+    <section id="intro">
+        <a href="#" class="logo"><img src="~/Assets/img/logo/logo.jpg" alt="" /></a>
+        <header>
+            <h2>Di tích thủ đức</h2>
+            <p>Khám phá các di tích nổi tiếng</p>
+        </header>
+    </section>
+
+    <!-- Mini Posts -->
+    <section>
+        <div class="mini-posts">
+
+            @foreach (var item in (List<Relic>)ViewBag.Sidebar)
+            {
+                <!-- Mini Post -->
+                <article class="mini-post">
+                    <header>
+                        <h3><a href="@Url.Action("Details","Home", new { id = item.ID})">@item.RelicName</a></h3>
+                    </header>
+                    <a href="@Url.Action("Details","Home", new { id = item.ID})" class="image"><img src="@Url.Content(item.Img)" alt="" /></a>
+                </article>
+            }
+
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="blurb">
+        <h2>About</h2>
+        <p>Trên mảnh đất TP.Thủ Đức hiện đại ngày nay vẫn còn lưu giữ hệ thống các di sản văn hóa độc đáo, tiêu biểu của TP.HCM và của cả nước. </p>
+        <ul class="actions">
+            <li><a href="@Url.Action("About","Home")" class="button">Chi tiết</a></li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+        <p class="copyright">&copy; Nguyễn Hoài Phong - ĐH Tài Nguyên &Aacute; Môi Trường TPCM. Thiết kế: <a href="http://html5up.net">HTML5 UP</a>. Hình ảnh: <a href="http://unsplash.com">Unsplash</a>.</p>
+    </section>
+
+</section>

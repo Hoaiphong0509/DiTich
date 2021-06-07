@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<webSimple.Models.Relic>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Di tích - Trang quản lý";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Quản lý từ khóa di tích</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Quản lý từ khóa di tích</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+                Dữ liệu
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <!-- Navbar Search-->
+                    @using (Html.BeginForm("Keyword", "Relic", FormMethod.Post))
+                    {
+                        <label>Tìm kiếm</label>
+                        <input id="tags" type="text" name="name" placeholder="Tìm kiếm" />
+                    }
+                    <!-- Navbar-->
+
+                    <br />
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Di tích</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Di tích</th>
+                                <th>#</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var relic in Model)
+                            {
+                                <tr class="row_@relic.ID">
+                                    <td>
+                                        <a href="@Url.Action("Details", "Relic", new { @id = relic.ID})">@relic.RelicName</a>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("EditKeyword", "Relic", new { @id = relic.ID})" class="btn btn-primary">Chỉnh sửa từ khóa</a>
+                                        <a href="@Url.Action("DetailsKeyword", "Relic", new { @id = relic.ID})" class="btn btn-success">Xem</a>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+                @Html.PagedListPager(Model, page => Url.Action("Keyword", new { page }))
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,105 @@
+﻿@model webSimple.Models.Relic
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Scripts/Uploadify/uploadify.css" rel="stylesheet" />
+<script src="~/Scripts/Uploadify/jquery.uploadify.min.js"></script>
+<script src="~/Scripts/Tinymce/tinymce.min.js"></script>
+
+<script>
+    tinymce.init({
+        selector: '#Content',
+        height: 500,
+        theme: 'modern',
+        plugins: [
+            'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            'searchreplace wordcount visualblocks visualchars code fullscreen',
+            'insertdatetime media nonbreaking save table contextmenu directionality',
+            'emoticons template paste textcolor colorpicker textpattern imagetools'
+        ],
+        toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+        toolbar2: 'print preview media | forecolor backcolor emoticons ',
+        image_advtab: true,
+
+
+    });
+</script>
+
+
+<script type="text/javascript">
+        $(function () {
+
+            $('#file_upload').uploadify({
+
+                'swf': '/Scripts/Uploadify/uploadify.swf',
+                'uploader': "@Url.Action("Upload", "News")",
+                'cancelImg': "@Url.Content("/Scripts/Uploadify/uploadify-cancel.png")",
+                'fileSizeLimit': '1MB', // Add Kb, MB, GB
+                'buttonText': 'Insert Images...', //Text for button
+                'queueSizeLimit': 10, // Max number of files allowed
+                'fileTypeDesc': 'Image Files',
+              'fileTypeExts': '*.gif; *.jpg; *.png', // File type allowed
+                'onUploadSuccess' : function(file, data, response) {
+                 tinyMCE.activeEditor.execCommand("mceInsertContent", true, "<img src='" + data + "' alt='Uploaded Image' class='img-responsive' />");
+                }
+
+            })
+
+        }
+);
+</script>
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Di tích</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li class="breadcrumb-item active"><a href="@Url.Action("Index", "Relic")">Di tích</a></li>
+            <li class="breadcrumb-item active">Thêm Di tích</li>
+        </ol>
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="container_relic">
+                    <div class="header_relic">
+                        @if (String.IsNullOrEmpty(Model.Img))
+                        {
+                            <img id="Image" class="cover_img_relic overlay" style="background-size:cover; object-fit:cover;" alt="cover image" src="~/Assets/img/Relics/tempt.jpg" />
+                        }
+                        else
+                        {
+                            <img id="Image" class="cover_img_relic overlay" style="background-size:cover;object-fit:cover" alt="cover image" src="@Url.Content(Model.Img)" />
+                        }
+                        <div class="content_header_relic">
+                            <div class="name_relic">
+                                @Html.DisplayFor(model => model.RelicName, new { htmlAttributes = new { @class = "_name-relic", @placeholder = "Tên di tích..." } })
+                                @*<input class="_name-relic" name="RelicName" placeholder="Tên di tích..." />*@
+                                @*@Html.TextBoxFor(model => model.RelicName, new { htmlAttributes = new { @class = "_name-relic", @placeholder = "Tên di tích..." } })*@
+                            </div>
+                            <div class="title_relic">
+                                @Html.DisplayFor(model => model.Title, new { htmlAttributes = new { @class = "_title-relic", @placeholder = "Tiêu đề..." } })
+                                @*@Html.TextBoxFor(model => model.Title, new { htmlAttributes = new { @class = "_title-relic", @placeholder = "Tiêu đề..." } })*@
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="content_relic" style="padding: 3rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;text-align:center" ">
+                        <div><label>Từ khóa</label></div>
+                        <div>
+                            <content class="keyword_relic">@Model.Keyword</content>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div style="padding: 4rem 22rem; display:grid; grid-template-columns: auto auto">
+                        <a href="@Url.Action("EditKeyword", "Relic", new { @id = Model.ID})" class="btn btn-warning">Chỉnh sửa</a>
+                        <a href="@Url.Action("Keyword", "Relic")" class="btn btn-danger">Quay về</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

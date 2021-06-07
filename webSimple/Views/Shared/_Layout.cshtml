@@ -1,0 +1,31 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Di tích Thủ Đức</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="~/Assets/img/logo/logo.png" sizes="32x32">
+    <link rel="stylesheet" href="~/Assets/css/main.css" />
+</head>
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        @RenderPage("~/Views/Shared/_Header.cshtml")
+
+
+        @RenderBody()
+
+    </div>
+
+    <!-- Scripts -->
+    @*<script src="~/Assets/js/jquery.min.js"></script> *@ <!--Thằng này nến cần giữ lại thì add nó sau thằng kia. à mà mấy thằng kia cũng là jquerty nên kc ần-->
+    <script src="~/Assets/js/browser.min.js"></script>
+    <script src="~/Assets/js/breakpoints.min.js"></script>
+    <script src="~/Assets/js/util.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+
+</body>
+</html>

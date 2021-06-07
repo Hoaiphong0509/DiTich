@@ -1,0 +1,66 @@
+﻿@model webSimple.Models.Relic
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Di tích</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+            <li class="breadcrumb-item active"><a href="@Url.Action("Index", "Relic")">Di tích</a></li>
+            <li class="breadcrumb-item active">nội dung di tích</li>
+        </ol>
+        <div class="card mb-4">
+
+            <div class="card-body">
+
+                <div class="container_relic">
+                    <div class="header_relic">
+                        @if (String.IsNullOrEmpty(Model.Img))
+                        {
+                            <img id="Image" class="cover_img_relic overlay" style="background-size:cover; object-fit: cover;
+   opacity: 0.8;" alt="cover image" src="~/Assets/img/Relics/tempt.jpg" />
+                        }
+                        else
+                        {
+                            <img id="Image" class="cover_img_relic overlay" style="background-size:cover; object-fit: cover;
+   opacity: 0.86; z-index:0" alt="cover image" src="@Url.Content(Model.Img)" />
+                        }
+
+                        <div class="content_header_relic">
+                            <div class="name_relic">
+                                <h1 style=" text-align:center; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;" class="">@Model.RelicName</h1>
+                            </div>
+                            <div class="title_relic">
+                                <h3 style="text-align: center; text-shadow: 6px 6px 0px rgba(0,0,0,0.2); " class="_title-relic">@Model.Title</h3>
+
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    <div class="content_relic" style="padding:3rem; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+
+                <div style="padding: 4rem 22rem; display:grid; grid-template-columns: auto auto">
+                    <a href="@Url.Action("Edit", "Relic", new { @id = Model.ID})" class="btn btn-lg btn-dark">Chỉnh sửa</a>
+                    <a href="@Url.Action("Index", "Relic")" class="btn btn-lg btn-warning">Quay về</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<div style="padding: 4rem;">
+
+
+</div>

@@ -1,0 +1,54 @@
+﻿@model webSimple.Models.About
+@using webSimple.Models;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main -->
+<div id="main">
+    <!-- Post -->
+    <article class="post" style="width: 55% !important; margin: 0 auto">
+        <header>
+            <div class="title">
+                <h2><a href="#">Về trang web</a></h2>
+                <p>@Model.Title</p>
+            </div>
+        </header>
+        <span class="image featured"><img src="~/Assets/img/pic03.jpg" alt="" /></span>
+        <p>@Model.Content</p>
+        <footer>
+            <ul class="stats">
+                <li><a href="#">Tác giả</a></li>
+                <li><a href="#" class="icon solid fa-eye">@Model.Author</a></li>
+            </ul>
+        </footer>
+    </article>
+
+</div>
+<!-- Menu -->
+<section id="menu">
+
+    <!-- Search -->
+    <section>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @style = "" }))
+        {
+            <input style="width:80%; display:inline;" type="text" name="query" placeholder="Tìm kiếm" />
+        }
+    </section>
+
+    <!-- Links -->
+    <section>
+        <ul class="links">
+            @foreach (var item in (List<Relic>)ViewBag.Sidebar)
+            {
+                <li>
+                    <a href="@Url.Action("Details","Home", new { id = item.ID})">
+                        <h3>@item.RelicName</h3>
+                        <p>@item.Title</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    </section>
+
+</section>

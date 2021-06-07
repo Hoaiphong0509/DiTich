@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<webSimple.Models.Image>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="p-4">
+    <h2 class="header-list-img shadow-lg p-3 mb-5 bg-white rounded p-4 text-center mce-colorbox">Thư viện ảnh</h2>
+
+    <p>
+        <a class="btn btn-primary" href="@Url.Action("Create", "Image")">Thêm ảnh vào thư viện</a>
+    </p>
+    <div class="container_img">
+        <div class="list_img shadow-lg p-3 mb-5 bg-white rounded justify-content-around">
+            @foreach (var item in Model)
+            {
+                <div class="img_item img__@item.Id">
+                    @if (String.IsNullOrEmpty(item.Url))
+                    {
+                        <img src="~/Areas/Admin/Assets/img/none.jpg" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content(item.Url)" />
+                    }
+
+
+                    @Ajax.ActionLink("Xóa", "Delete", new { @ID = item.Id }, new AjaxOptions
+                             {
+                                 Confirm = "Bạn có muốn xóa ảnh này ?",
+                                 HttpMethod = "Post",
+                                 OnComplete = $"$('.img__{@item.Id}').remove();" + "Movie.Delete(xhr);",
+
+                             }, new { @class = "btn-delete-img btn btn-danger btn-block" })
+                </div>
+            }
+        </div>
+    </div>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    <p>
+        <a class="btn btn-primary" href="@Url.Action("Create", "Image")">Thêm ảnh vào thư viện</a>
+    </p>
+</div>
